@@ -154,9 +154,14 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
             ProdutosDAO produtodao = new ProdutosDAO();
             produtodao.cadastrarProduto(produto);
+            
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            
+            cadastroNome.setText("");
+            cadastroValor.setText("");
         }
         catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Erro no cadastro!");
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         }
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
