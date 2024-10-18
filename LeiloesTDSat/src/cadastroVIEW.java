@@ -1,4 +1,5 @@
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /*
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
  */
 public class cadastroVIEW extends javax.swing.JFrame {
 
+    int contador = 0;
     /**
      * Creates new form cadastroVIEW
      */
@@ -148,10 +150,14 @@ public class cadastroVIEW extends javax.swing.JFrame {
             String nome = cadastroNome.getText();
             String valor = cadastroValor.getText();
             String status = "A Venda";
+            
             produto.setNome(nome);
             produto.setValor(Integer.parseInt(valor));
             produto.setStatus(status);
+            produto.setId(contador);
 
+            contador++;
+            
             ProdutosDAO produtodao = new ProdutosDAO();
             produtodao.cadastrarProduto(produto);
             
@@ -164,6 +170,14 @@ public class cadastroVIEW extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         }
         
+        ProdutosDAO produtosDAO = new ProdutosDAO();
+        
+        ArrayList<ProdutosDTO> listagem = produtosDAO.listarProdutos();
+        
+        int i = listagem.size();
+        //ProdutosDTO prod = listagem.get(i);
+        
+        JOptionPane.showMessageDialog(null, i);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
