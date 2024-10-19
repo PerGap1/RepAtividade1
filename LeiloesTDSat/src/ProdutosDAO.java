@@ -10,7 +10,7 @@ public class ProdutosDAO {
     Connection conn;
     PreparedStatement prep;
     ResultSet resultset;
-    ArrayList<ProdutosDTO> listagem = new ArrayList<>();
+    static ArrayList<ProdutosDTO> listagem = new ArrayList<>();
     
     public void cadastrarProduto (ProdutosDTO produto){
         listagem.add(produto);
@@ -20,7 +20,7 @@ public class ProdutosDAO {
         conn = new conectaDAO().connectDB();
     }
     
-    public ArrayList<ProdutosDTO> listarProdutos(){
+    public static ArrayList<ProdutosDTO> listarProdutos(){
         
         return listagem;
     }    
