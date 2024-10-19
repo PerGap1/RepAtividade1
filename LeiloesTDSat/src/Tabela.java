@@ -7,8 +7,7 @@ public class Tabela {
     
     public Tabela() {
         tabelaModelo = new DefaultTableModel(colunas, 0);
-
-        //ProdutosDAO produtosDAO = new ProdutosDAO();
+        
         List<ProdutosDTO> lista = ProdutosDAO.listarProdutos();
 
         for (int i = 0; i < lista.size(); i++) {
@@ -22,6 +21,27 @@ public class Tabela {
             };
             
             tabelaModelo.addRow(linha);
+        }
+    }
+    
+    public Tabela(int diferencial) {
+        tabelaModelo = new DefaultTableModel(colunas, 0);
+        
+        List<ProdutosDTO> lista = ProdutosDAO.listarProdutos();
+
+        for (int i = 0; i < lista.size(); i++) {
+            ProdutosDTO produtoAtual = lista.get(i);
+
+            if(produtoAtual.getStatus().equals("Vendido")){
+                String[] linha = {
+                String.valueOf(produtoAtual.getId()),
+                produtoAtual.getNome(),
+                String.valueOf(produtoAtual.getValor()),
+                produtoAtual.getStatus()
+                };
+                
+                tabelaModelo.addRow(linha);
+            }
         }
     }
     
