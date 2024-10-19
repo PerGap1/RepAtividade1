@@ -15,8 +15,6 @@ public class ProdutosDAO {
     public void cadastrarProduto (ProdutosDTO produto){
         listagem.add(produto);
 
-        JOptionPane.showMessageDialog(null, listagem.size());
-        
         conn = new conectaDAO().connectDB();
     }
     
@@ -24,5 +22,18 @@ public class ProdutosDAO {
         
         return listagem;
     }    
+    
+    public void venderProduto(int id){
+        ProdutosDTO produto = ProdutosDAO.listagem.get(id);
+        
+        if (!produto.getStatus().equals("Vendido")){
+            produto.setStatus("Vendido");
+            JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, "O produto já foi vendido!");
+        }
+    }
 }
 

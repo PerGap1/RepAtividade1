@@ -169,15 +169,6 @@ public class cadastroVIEW extends javax.swing.JFrame {
         catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         }
-        
-        ProdutosDAO produtosDAO = new ProdutosDAO();
-        
-        ArrayList<ProdutosDTO> listagem = produtosDAO.listarProdutos();
-        
-        int i = listagem.size();
-        //ProdutosDTO prod = listagem.get(i);
-        
-        JOptionPane.showMessageDialog(null, i);
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void btnProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdutosActionPerformed
