@@ -1,16 +1,12 @@
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author Adm
- */
 public class cadastroVIEW extends javax.swing.JFrame {
 
     int contador = 0;
@@ -131,7 +127,7 @@ public class cadastroVIEW extends javax.swing.JFrame {
                 .addComponent(btnCadastrar)
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(btnProdutos)
                 .addGap(22, 22, 22))
         );
@@ -146,28 +142,43 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         try{
-            ProdutosDTO produto = new ProdutosDTO();
+            String sql = "INSERT INTO ProdutosDTO (nome, valor, status) VALUES (?, ?, ?)";
+            
+            conectaDAO conexao = new conectaDAO();
+            Connection con = conexao.connectDB();
+            
+            PreparedStatement stmt = con.prepareStatement(sql);
+            
+            //ProdutosDTO produto = new ProdutosDTO();
             String nome = cadastroNome.getText();
             String valor = cadastroValor.getText();
             String status = "A Venda";
             
-            produto.setNome(nome);
+            /*produto.setNome(nome);
             produto.setValor(Integer.parseInt(valor));
             produto.setStatus(status);
             produto.setId(contador);
 
-            contador++;
+            contador++;*/
             
-            ProdutosDAO produtodao = new ProdutosDAO();
-            produtodao.cadastrarProduto(produto);
+            stmt.setString(1, nome);
+            stmt.setInt(2, Integer.parseInt(valor));
+            stmt.setString(3, status);
+            
+            /*ProdutosDAO produtodao = new ProdutosDAO();
+            produtodao.cadastrarProduto(produto);*/
             
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
             
             cadastroNome.setText("");
             cadastroValor.setText("");
+            
+            conexao.disconnectDB();
         }
         catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro na conexão com o banco de dados!" + e);
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

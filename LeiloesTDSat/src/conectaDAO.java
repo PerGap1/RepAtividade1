@@ -5,15 +5,23 @@ import javax.swing.JOptionPane;
 
 public class conectaDAO {
     
+    Connection conn = null;
+    
     public Connection connectDB(){
-        Connection conn = null;
-        
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/repositorios?user=visualizador&password=123&useSSL=false");
-            
-        } catch (SQLException erro){
-            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + erro.getMessage());
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/repositorios?useSSL=false", "visualizador", "123");
+        } 
+        catch (SQLException | ClassNotFoundException e){
+            JOptionPane.showMessageDialog(null, "Erro ConectaDAO" + e.getMessage());
         }
         return conn;
+    }
+    
+    public void disconnectDB(){
+        try{
+            conn.close();
+        }
+        catch(SQLException e){}
     }
 }

@@ -1,4 +1,4 @@
-import java.util.List;
+import javax.management.Query;
 import javax.swing.table.DefaultTableModel;
 
 public class Tabela {
@@ -7,6 +7,8 @@ public class Tabela {
     
     public Tabela() {
         tabelaModelo = new DefaultTableModel(colunas, 0);
+        
+        TypedQuery<ProdutosDTO> produto = manager.createQuery("SELECT j FROM Jogos j WHERE j.id = :id AND j.:tipo = :filtro", Jogos.class);
         
         List<ProdutosDTO> lista = ProdutosDAO.listarProdutos();
 
