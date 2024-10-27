@@ -34,6 +34,8 @@ public class produtosDAO {
         manager.getTransaction().commit();
 
         JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+        
+        listagem.add(produto);
     }
     
     public static void venderProduto(ProdutosDTO produto){
@@ -42,6 +44,8 @@ public class produtosDAO {
         conexao.getManager().getTransaction().commit();
         
         JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
+        
+        listagem.set(produto.getId(), produto);
     }
     
     public static ProdutosDTO ConsultaProdutos(int id){
@@ -70,7 +74,7 @@ public class produtosDAO {
                 ProdutosDTO produtoAtual = ConsultaProdutos(i);
                 
                 if(produtoAtual.getStatus().equals("Vendido")){
-                   listagem.add(produtoAtual); 
+                    lista.add(produtoAtual); 
                 }
             }
             catch(NullPointerException e){}

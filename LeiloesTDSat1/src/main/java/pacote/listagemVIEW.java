@@ -2,7 +2,6 @@ package pacote;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import br.com.senac.leiloestdsat1.conexao;
 
 public class listagemVIEW extends javax.swing.JFrame {
 
