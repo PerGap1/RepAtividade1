@@ -160,18 +160,12 @@ public class cadastroVIEW extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         if (!txtNome.getText().equals("") && !txtValor.getText().equals("")){
-            EntityManager manager = conexao.getManager();
-
             ProdutosDTO produto = new ProdutosDTO();
             produto.setNome(txtNome.getText());
             produto.setValor(Integer.parseInt(txtValor.getText()));
             produto.setStatus("A venda");
             
-            manager.getTransaction().begin();
-            manager.persist(produto);
-            manager.getTransaction().commit();
-
-            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+            produtosDAO.cadastrarProduto(produto);
             
             txtNome.setText("");
             txtValor.setText("");

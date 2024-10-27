@@ -12,7 +12,7 @@ public class Tabela {
 
         for (int i = 0; i <= conexao.retornaIdMaxUsuario(); i++) {
             try{
-                ProdutosDTO produtoAtual = AuxComandos.ConsultaProdutos(i);
+                ProdutosDTO produtoAtual = produtosDAO.ConsultaProdutos(i);
 
                 String[] linha = {
                     String.valueOf(produtoAtual.getId()),
@@ -32,7 +32,7 @@ public class Tabela {
 
         for (int i = 0; i <= conexao.retornaIdMaxUsuario(); i++) {
             try{
-                ProdutosDTO produtoAtual = AuxComandos.ConsultaProdutos(i);
+                ProdutosDTO produtoAtual = produtosDAO.ConsultaProdutos(i);
 
                 if(produtoAtual.getStatus().equals("Vendido")){
                     String[] linha = {

@@ -4,14 +4,16 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
-import javax.swing.JOptionPane;
 import pacote.cadastroVIEW;
+import pacote.produtosDAO;
 
 public class conexao {
     public static EntityManagerFactory fabricaEntidade = Persistence.createEntityManagerFactory("unidade");
     public static EntityManager manager = fabricaEntidade.createEntityManager();
     
     public static void main(String[] args) {
+        produtosDAO.preencherLista();
+        
         cadastroVIEW cadastroVIEW = new cadastroVIEW();
         cadastroVIEW.setVisible(true);
     }
