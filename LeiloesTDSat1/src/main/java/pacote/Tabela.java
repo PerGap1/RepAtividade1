@@ -1,6 +1,5 @@
 package pacote;
 
-import br.com.senac.leiloestdsat1.conexao;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,21 +29,19 @@ public class Tabela {
     
     public Tabela(int diferencial) {
         tabelaModelo = new DefaultTableModel(colunas, 0);
+        
+        ArrayList<ProdutosDTO> listaProdutos = produtosDAO.listarProdutosVendidos();
 
-        for (int i = 0; i <= conexao.retornaIdMaxUsuario(); i++) {
+        for (ProdutosDTO produtoAtual : listaProdutos) {
             try{
-                ProdutosDTO produtoAtual = produtosDAO.ConsultaProdutos(i);
-
-                if(produtoAtual.getStatus().equals("Vendido")){
-                    String[] linha = {
+                String[] linha = {
                     String.valueOf(produtoAtual.getId()),
                     produtoAtual.getNome(),
                     String.valueOf(produtoAtual.getValor()),
                     produtoAtual.getStatus()
-                    };
+                };
 
-                    tabelaModelo.addRow(linha);
-                }
+                tabelaModelo.addRow(linha);
             }
             catch(NullPointerException e){}
         }

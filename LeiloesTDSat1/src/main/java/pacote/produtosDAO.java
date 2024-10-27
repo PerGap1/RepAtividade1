@@ -62,7 +62,7 @@ public class produtosDAO {
         return listagem;
     }  
     
-    public ArrayList<ProdutosDTO> listarProdutosVendidos(){
+    public static ArrayList<ProdutosDTO> listarProdutosVendidos(){
         ArrayList<ProdutosDTO> lista = new ArrayList<>();
         
         for (int i = 0; i <= conexao.retornaIdMaxUsuario(); i++) {
