@@ -1,6 +1,7 @@
 package pacote;
 
 import br.com.senac.leiloestdsat1.conexao;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 public class Tabela {
@@ -9,11 +10,11 @@ public class Tabela {
     
     public Tabela() {
         tabelaModelo = new DefaultTableModel(colunas, 0);
+        
+        ArrayList<ProdutosDTO> listaProdutos = produtosDAO.listarProdutos();
 
-        for (int i = 0; i <= conexao.retornaIdMaxUsuario(); i++) {
+        for (ProdutosDTO produtoAtual : listaProdutos) {
             try{
-                ProdutosDTO produtoAtual = produtosDAO.ConsultaProdutos(i);
-
                 String[] linha = {
                     String.valueOf(produtoAtual.getId()),
                     produtoAtual.getNome(),

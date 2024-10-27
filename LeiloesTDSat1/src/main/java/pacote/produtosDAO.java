@@ -58,8 +58,25 @@ public class produtosDAO {
         }
     }
     
-    public ArrayList<ProdutosDTO> listarProdutos(){
+    public static ArrayList<ProdutosDTO> listarProdutos(){
         return listagem;
     }  
+    
+    public ArrayList<ProdutosDTO> listarProdutosVendidos(){
+        ArrayList<ProdutosDTO> lista = new ArrayList<>();
+        
+        for (int i = 0; i <= conexao.retornaIdMaxUsuario(); i++) {
+            try{
+                ProdutosDTO produtoAtual = ConsultaProdutos(i);
+                
+                if(produtoAtual.getStatus().equals("Vendido")){
+                   listagem.add(produtoAtual); 
+                }
+            }
+            catch(NullPointerException e){}
+        }
+        
+        return lista;
+    }
 }
 
